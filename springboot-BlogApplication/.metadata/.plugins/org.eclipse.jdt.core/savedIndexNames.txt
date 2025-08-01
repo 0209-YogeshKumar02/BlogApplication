@@ -1,0 +1,2 @@
+INDEX VERSION 1.131+D:\New folder (2)\springboot-BlogApplication\.metadata\.plugins\org.eclipse.jdt.core
+1042163798.index
