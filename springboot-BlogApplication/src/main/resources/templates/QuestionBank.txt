@@ -1,0 +1,562 @@
+💻 Core Java
+What are the key differences between ArrayList and LinkedList?
+
+Explain the concept of immutability in Java. How do you create an immutable class?
+
+What is the difference between == and .equals() in Java?
+
+How does Java handle memory management and garbage collection?
+
+What are functional interfaces and how are they used in Java 8?
+
+🧩 Object-Oriented Programming (OOP)
+
+Can you explain the four pillars of OOP with examples?
+
+What is polymorphism and how is it implemented in Java?
+
+How do you achieve encapsulation in your code?
+
+What is the difference between abstract classes and interfaces?
+
+🌐 Spring Framework (Boot, MVC, Data)
+What is Spring Boot and how is it different from the traditional Spring framework?
+
+How does dependency injection work in Spring?
+
+What are REST controllers and how do you expose APIs using Spring Boot?
+
+How do you handle exception handling in Spring Boot applications?
+
+What is the role of @Autowired, @Component, and @Service annotations?
+
+🗄️ Database & JPA/Hibernate
+What is the difference between JPA and Hibernate?
+
+How do you define entity relationships (OneToMany, ManyToOne) in JPA?
+
+What are transactions and how are they managed in Spring?
+
+How do you write custom queries using Spring Data JPA?
+
+What are the pros and cons of using native queries vs JPQL?
+
+🔌 RESTful APIs
+What are the key principles of REST architecture?
+
+How do you handle versioning in REST APIs?
+
+What are status codes and how do you use them appropriately?
+
+How do you implement authentication and authorization in REST APIs?
+
+What tools do you use for API testing (e.g., Postman, Swagger)?
+
+⚙️ System Design Basics
+How would you design a URL shortening service?
+
+What are microservices and how do they differ from monolithic architecture?
+
+How do you ensure scalability and performance in backend systems?
+
+What is caching and where would you use it in a backend application?
+
+How do you handle concurrent requests and avoid race conditions?
+
+🧪 Testing & DevOps
+What is unit testing and which frameworks do you use (e.g., JUnit, Mockito)?
+
+How do you mock dependencies in your tests?
+
+What is CI/CD and have you worked with tools like Jenkins or GitHub Actions?
+
+How do you manage environment-specific configurations in Spring Boot?
+
+Would you like me to turn this into a printable checklist or tailor it for a specific job role (e.g., fintech, e-commerce, SaaS)?
+
+
+
+
+
+
+
+💻 Core Java
+1. What is the difference between == and .equals() in Java?
+== compares object references (memory addresses).
+
+.equals() compares object content (defined by the class).
+
+Example:
+
+java
+String a = new String("hello");
+String b = new String("hello");
+System.out.println(a == b);      // false
+System.out.println(a.equals(b)); // true
+2. What is a functional interface?
+An interface with exactly one abstract method.
+
+Used in lambda expressions.
+
+Example:
+
+java
+@FunctionalInterface
+interface MyFunc {
+    void execute();
+}
+🧩 OOP Concepts
+3. What is polymorphism in Java?
+Ability of an object to take many forms.
+
+Achieved via method overriding and method overloading.
+
+Example:
+
+java
+class Animal {
+    void sound() { System.out.println("Animal sound"); }
+}
+class Dog extends Animal {
+    void sound() { System.out.println("Dog barks"); }
+}
+4. Difference between abstract class and interface?
+Feature	Abstract Class	Interface
+Methods	Can have both	Only abstract (until Java 8)
+Multiple Inheritance	Not supported	Supported
+Fields	Can have fields	Only constants
+🌐 Spring Boot
+5. What is Spring Boot and why is it used?
+Spring Boot simplifies Spring app development by:
+
+Auto-configuring beans
+
+Embedded servers (Tomcat)
+
+No XML configuration
+
+It helps build standalone, production-ready applications quickly.
+
+6. What is dependency injection?
+A design pattern where objects are provided their dependencies.
+
+Spring uses annotations like @Autowired to inject beans.
+
+🗄️ JPA / Hibernate
+7. What is the difference between JPA and Hibernate?
+JPA is a specification.
+
+Hibernate is an implementation of JPA.
+
+JPA provides annotations like @Entity, @Id, @OneToMany.
+
+8. How do you define a one-to-many relationship in JPA?
+java
+@Entity
+class Department {
+    @OneToMany(mappedBy = "department")
+    List<Employee> employees;
+}
+
+@Entity
+class Employee {
+    @ManyToOne
+    Department department;
+}
+🔌 REST APIs
+9. What is REST and what are its key principles?
+REST stands for Representational State Transfer.
+
+Principles:
+
+Statelessness
+
+Resource-based URLs
+
+Use of HTTP methods (GET, POST, PUT, DELETE)
+
+Standard status codes
+
+10. How do you handle exceptions in Spring Boot REST APIs?
+Use @ControllerAdvice and @ExceptionHandler:
+
+java
+@ControllerAdvice
+public class GlobalExceptionHandler {
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<String> handleNotFound(ResourceNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+}
+⚙️ System Design Basics
+11. How would you design a URL shortening service?
+Components:
+
+API to accept long URL and return short code
+
+Database to store mappings
+
+Redirect logic for short URL
+
+Use hashing or base62 encoding for short codes.
+
+12. What is caching and where would you use it?
+Caching stores frequently accessed data in memory.
+
+Improves performance and reduces DB load.
+
+Use cases: product catalog, user sessions, API responses.
+
+🧪 Testing
+13. What is unit testing and which frameworks do you use?
+Unit testing checks individual components.
+
+Use JUnit for writing tests and Mockito for mocking dependencies.
+
+14. How do you mock a service in a test?
+java
+@Mock
+UserService userService;
+
+@InjectMocks
+UserController userController;
+Would you like me to format this into a printable guide or expand it with advanced questions for senior roles?
+
+
+
+
+
+
+
+
+
+🔧 Scenario 1: API Performance Issue
+❓ Your REST API is taking too long to respond. How would you troubleshoot and optimize it?
+✅ Answer:
+Step 1: Profile the API
+
+Use tools like Spring Actuator, logs, or APM tools (e.g., New Relic) to identify bottlenecks.
+
+Step 2: Check Database Queries
+
+Look for N+1 query problems or missing indexes.
+
+Optimize queries or use pagination.
+
+Step 3: Add Caching
+
+Use Redis or in-memory caching for frequently accessed data.
+
+Step 4: Reduce Payload
+
+Avoid sending unnecessary fields in the response.
+
+Step 5: Asynchronous Processing
+
+Use @Async or message queues for non-critical tasks.
+
+🧩 Scenario 2: Handling Concurrent Updates
+❓ Two users try to update the same record simultaneously. How do you prevent data inconsistency?
+✅ Answer:
+Use Optimistic Locking with JPA:
+
+java
+@Version
+private int version;
+This adds a version column to the entity. If two updates happen, the second one will fail if the version has changed.
+
+Alternatively, use Pessimistic Locking if data integrity is critical:
+
+java
+@Lock(LockModeType.PESSIMISTIC_WRITE)
+🔐 Scenario 3: Securing an API
+❓ You need to secure an endpoint so only authenticated users can access it. How would you do that in Spring Boot?
+✅ Answer:
+Use Spring Security:
+
+Add dependency: spring-boot-starter-security
+
+Configure security:
+
+java
+@Configuration
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+          .authorizeRequests()
+          .antMatchers("/api/secure/**").authenticated()
+          .and()
+          .httpBasic();
+    }
+}
+For token-based auth, use JWT (JSON Web Tokens).
+
+🗄️ Scenario 4: Database Migration
+❓ You need to add a new column to a live production database. How do you handle this safely?
+✅ Answer:
+Use a migration tool like Flyway or Liquibase.
+
+Steps:
+
+Create a migration script: V2__add_column.sql
+
+Test in staging environment.
+
+Deploy during low-traffic hours.
+
+Ensure backward compatibility in code (e.g., handle nulls).
+
+🔄 Scenario 5: Retry Logic for External API
+❓ Your service calls an external API that occasionally fails. How do you implement retry logic?
+✅ Answer:
+Use Spring Retry:
+
+java
+@Retryable(
+  value = { RemoteServiceException.class },
+  maxAttempts = 3,
+  backoff = @Backoff(delay = 2000)
+)
+public String callExternalApi() {
+    // logic
+}
+Alternatively, use Resilience4j for more advanced features like circuit breakers and rate limiting.
+
+📦 Scenario 6: File Upload Handling
+❓ How would you implement a secure file upload endpoint in Spring Boot?
+✅ Answer:
+Use MultipartFile in controller:
+
+java
+@PostMapping("/upload")
+public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) {
+    // validate and store
+}
+Security considerations:
+
+Validate file type and size.
+
+Store files outside the web root.
+
+Rename files to avoid collisions.
+
+Scan for malware if needed.
+
+Would you like me to add more scenarios related to microservices, CI/CD, or real-time data processing?
+
+Can you provide more scenario-based questions?
+Absolutely! Here are more scenario-based interview questions and answers tailored for a Backend Java Developer with 2 years of experience, covering areas like microservices, error handling, deployment, logging, and scalability.
+
+🧵 Scenario 7: Microservices Communication
+❓ You have two microservices: Service A needs to call Service B. How would you implement this communication?
+✅ Answer:
+Use REST API for synchronous communication:
+
+Use RestTemplate or WebClient (preferred for reactive).
+
+For resilience:
+
+Add retry, timeout, and circuit breaker using Resilience4j.
+
+For asynchronous communication:
+
+Use message queues like Kafka or RabbitMQ.
+
+Ensure authentication between services using JWT or API keys.
+
+🧱 Scenario 8: Breaking a Monolith
+❓ Your team wants to break a monolithic app into microservices. What steps would you take?
+✅ Answer:
+Identify bounded contexts: Split by business domains.
+
+Extract services gradually: Start with least dependent modules.
+
+Define APIs: Clear contracts between services.
+
+Use shared libraries: For common utilities and models.
+
+Implement service discovery: Use tools like Eureka or Consul.
+
+Centralized logging and monitoring: Use ELK stack or Prometheus + Grafana.
+
+🧼 Scenario 9: Cleaning Up Stale Data
+❓ You need to delete stale records from the database every night. How would you implement this?
+✅ Answer:
+Use Spring Scheduler:
+
+java
+@Scheduled(cron = "0 0 2 * * ?") // Runs at 2 AM daily
+public void cleanStaleData() {
+    // delete logic
+}
+Ensure:
+
+Proper indexing for delete queries.
+
+Logging and alerting on failures.
+
+Transactional safety.
+
+📊 Scenario 10: Logging Strategy
+❓ How would you implement logging in a production-grade backend application?
+✅ Answer:
+Use SLF4J with Logback or Log4j2.
+
+Log levels:
+
+INFO for business flow
+
+DEBUG for dev diagnostics
+
+ERROR for failures
+
+Use MDC (Mapped Diagnostic Context) for tracing request IDs.
+
+Centralize logs using ELK stack or Fluentd + CloudWatch.
+
+🧠 Scenario 11: Handling NullPointerException
+❓ Your application throws a NullPointerException in production. How do you debug and prevent it?
+✅ Answer:
+Debugging:
+
+Check logs and stack trace.
+
+Identify the object that’s null.
+
+Prevention:
+
+Use Optional where applicable.
+
+Add null checks or use Objects.requireNonNull().
+
+Write unit tests to cover edge cases.
+
+🚀 Scenario 12: Deployment Failure
+❓ Your Spring Boot app fails to start after deployment. What steps do you take to resolve it?
+✅ Answer:
+Check application logs for stack trace.
+
+Validate:
+
+Port conflicts
+
+Missing environment variables
+
+Database connectivity
+
+Incorrect configuration files
+
+Roll back to previous stable version if needed.
+
+Use health checks and readiness probes in containerized environments.
+
+🧮 Scenario 13: High Load Handling
+❓ Your API is experiencing high traffic. How do you ensure it scales effectively?
+✅ Answer:
+Horizontal scaling: Deploy multiple instances behind a load balancer.
+
+Caching: Use Redis or in-memory cache for frequent reads.
+
+Database optimization: Indexing, connection pooling.
+
+Rate limiting: Prevent abuse using tools like Bucket4j.
+
+Async processing: Offload heavy tasks to background jobs.
+
+🧪 Scenario 14: Testing a Payment Flow
+❓ You’re building a payment API. How do you test it safely?
+✅ Answer:
+Use sandbox environments provided by payment gateways.
+
+Mock external APIs using WireMock or Mockito.
+
+Write integration tests for end-to-end flow.
+
+Validate edge cases: failed payments, retries, duplicate transactions.
+
+
+
+
+
+
+
+
+🧹 Types of Garbage Collectors in Java
+GC Type	Description	Best For
+Serial GC	Single-threaded collector. Simple and efficient for small applications.	Small apps or single-core systems
+Parallel GC	Uses multiple threads for GC. Focuses on throughput.	Multi-core systems, batch jobs
+CMS (Concurrent Mark-Sweep)	Minimizes pause time by doing most GC work concurrently. Deprecated in Java 14.	Low-latency apps (pre-Java 14)
+G1 GC (Garbage First)	Breaks heap into regions. Prioritizes regions with most garbage.	Large heaps, balanced performance
+ZGC (Z Garbage Collector)	Scalable, low-latency GC. Handles heaps up to terabytes with sub-millisecond pauses.	Real-time systems, large heaps
+Shenandoah GC	Low-pause GC with concurrent compaction.	Low-latency apps, large heaps
+Epsilon GC	No-op GC (doesn’t reclaim memory). Used for testing or short-lived apps.	Performance testing only
+🔍 Quick Comparison
+Feature	Serial GC	Parallel GC	G1 GC	ZGC	Shenandoah
+Pause Time	High	Medium	Low	Very Low	Very Low
+Throughput	Medium	High	High	Medium	Medium
+Heap Size Support	Small	Medium	Large	Huge	Large
+Concurrent GC	No	Partial	Yes	Yes	Yes
+Java Version	All	All	Default since Java 9	Java 11+	Java 12+
+⚙️ How to Choose a GC
+Small app or single-threaded → Serial GC
+
+High throughput batch processing → Parallel GC
+
+Balanced latency and throughput → G1 GC (default in Java 9+)
+
+Ultra-low pause time → ZGC or Shenandoah
+
+Testing memory behavior → Epsilon GC
+
+🛠️ How to Set GC in JVM
+You can specify the GC type using JVM flags:
+
+bash
+# G1 GC (default in Java 9+)
+-XX:+UseG1GC
+
+# Parallel GC
+-XX:+UseParallelGC
+
+# ZGC (Java 11+)
+-XX:+UseZGC
+
+# Shenandoah (Java 12+)
+-XX:+UseShenandoahGC
+Would you like help choosing the best GC for a specific type of application you're working on?
+
+
+
+
+Solied Principle
+
+
+Jenkins personal project m kha use krta h
+
+If we call two multiple services and how we can set the priority?
+
+Design Pattern and System Design?
+
+[a,bc,def]
+[f,ed,cba]
+
+
+public class ReverseStrings {
+    public static void main(String[] args) {
+        List<String> input = Arrays.asList("a", "bc", "def");
+        List<String> output = new ArrayList<>();
+
+        for (String s : input) {
+            output.add(new StringBuilder(s).reverse().toString());
+        }
+
+        Collections.reverse(output);
+        System.out.println(output); // Output: [f, ed, cba]
+    }
+}
+
+
+
+
+
